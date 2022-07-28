@@ -38,14 +38,19 @@ class PresensiController extends Controller
         $id = auth()->user()->id;
        
         Presensi::create([
-            'id_user' => $id,
-            'tanggal' => $data['tanggal'],
+            'id' => $data['id'],
+            'id_user' => $data['id_user'],
+            'status' => $data['status'],
+            'tanggal' => $data['tanggal']
+            
         ]);
     }
 
     protected function add(Request $request){
         $date_now = date("Y-m-d");
         $id = auth()->user()->id;
+        $lastID = NULL;
+
 
         if(Presensi::isExist($date_now, $id)){
             if(Presensi::isFinishedWorking($date_now, $id)){
@@ -56,9 +61,16 @@ class PresensiController extends Controller
                 return redirect('/presensi')->with('status', 'Data kehadiran anda berhasil disimpan.');
             }
         }
-
+        $lastID = Presensi::getLastID();
+        if($lastID==NULL){
+            $lastID = 1;
+        }
+        else{
+            $lastID = $lastID[0]->id +1;
+        }
         $presensi = new Presensi;
-        $presensi->id_user = $id;
+        $presensi->id = $lastID;
+        $presensi->id_user =  strval(sprintf( "%08d", (int)$id));
         $presensi->status = 'hadir';
         $presensi->tanggal = date("Y-m-d");;
         $presensi->save();

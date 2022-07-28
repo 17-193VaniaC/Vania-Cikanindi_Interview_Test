@@ -66,7 +66,13 @@ class RegisterController extends Controller
         $NIP .= strval(substr($data['tahun_masuk'], -2));
         $NIP .= $data['fungsional'];
         $lastID = User::getLastID();
-        $lastID = strval((int)substr($lastID[0]->id, 4)+1);
+        if($lastID==NULL){
+            $lastID = 1;
+        }
+        else{
+            $lastID = (int)substr($lastID[0]->id, 4)+1;
+        }
+        $lastID = sprintf( "%04d", $lastID);
         $NIP.= $lastID;
         return $NIP;
     }

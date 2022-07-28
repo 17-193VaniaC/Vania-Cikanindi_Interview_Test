@@ -30,6 +30,7 @@ class PerizinanController extends Controller
 
    protected function add(Request $request){
         $id = auth()->user()->id;   
+        $lastID = NULL;
         
         if(Presensi::isPast($request->tanggal)){
             return redirect('/izin')->with('error', 'Harap periksa kembali tanggal perizinan Anda. Tanggal tidak boleh kurang dari hari ini. ');
@@ -39,9 +40,17 @@ class PerizinanController extends Controller
             return redirect('/izin')->with('error', 'Sudah terdapat data kehadiran pada tanggal tersebut.');
         }
 
+        $lastID = Presensi::getLastID();
+        if($lastID==NULL){
+            $lastID = 1;
+        }
+        else{
+            $lastID = $lastID[0]->id +1;
+        }
+        
         $presensi = new Presensi;
-        $presensi->id = random_int(1, 4294967295);
-        $presensi->id_user = $id;
+        $presensi->id = $lastID;
+        $presensi->id_user =  strval(sprintf( "%08d", (int)$id));
         $presensi->tanggal = $request->tanggal;
         $presensi->status = 'alpha';
         $presensi->save();

@@ -48,7 +48,7 @@ class User extends Authenticatable
     ];
 
     protected static function getLastID(){
-        return DB::select('select id from users ORDER BY RIGHT(id,2) ASC LIMIT 1;');
+        return DB::select('select id from users ORDER BY RIGHT(id,4) DESC LIMIT 1;');
     }
 
     

@@ -52,35 +52,18 @@ class AttendancerecapController extends Controller
 
    public function getReport(){
         try{
-            // $users = DB::query('users')->orderBy('id_user','desc')
-            // ->join( 'presensi', DB::raw('users.id') , '=' , DB::raw('presensi.id_user') )
-            // ->where('presensi.tanggal', '<=' , 'CURDATE()' )
-            // ->select( 
-            // DB::raw("users.id"), DB::raw("users.name"), DB::raw("users.fungsional"), DB::raw("users.struktural"), 
-            // DB::raw("COUNT(presensi.status = 'hadir') as hadir"),
-            // DB::raw("COUNT(presensi.status = 'izin') as izin"),
-            // DB::raw("COUNT(presensi.status = 'sakit') as sakit"),
-            // DB::raw("COUNT(presensi.status = 'alpha') as alpha"),
-            // DB::raw("COUNT(presensi.status) as total"),
-            // )
-            // ->groupBy(DB::raw('users.id'), DB::raw('users.name'), DB::raw('users.fungsional'), DB::raw('users.struktural'))
-            // ->get();
-            // return response()->json($users);
-            $query = "SELECT users.id, 
-                    users.name,
-                    users.fungsional, 
-                    users.struktural, 
-                    SUM(presensi.status='hadir') AS hadir, 
-                    SUM(presensi.status='izin') AS izin,
-                    SUM(presensi.status='sakit') AS sakit,
-                    SUM(presensi.status='alpha') AS alpha, 
-                    COUNT(*) AS total
-                    FROM  presensi LEFT JOIN users 
-                    ON presensi.id_user = users.id 
-                    WHERE presensi.tanggal <= CURDATE()
-                    GROUP BY users.id;";
-             $exist =  DB::select($query)->get();
-            return response()->json($users);
+            $query = "SELECT users.id, users.name, users.fungsional, users.struktural,
+                sum(case when presensi.status = 'masuk' then 1 else 0 end) as masuk,
+                sum(case when presensi.status = 'izin' then 1 else 0 end) as izin,
+                sum(case when presensi.status = 'sakit' then 1 else 0 end) as sakit,
+                sum(case when presensi.status = 'alpha' then 1 else 0 end) as alpha,
+                COUNT(presensi.status) as total
+                from presensi, users
+                WHERE presensi.id_user=users.id
+                and presensi.tanggal <= CURDATE()
+                group by presensi.id_user;";
+            $exist =  DB::select($query)->get();
+            return response()->json($exist);
 
         }
         catch(Exception $e){

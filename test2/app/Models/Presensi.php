@@ -34,20 +34,16 @@ class Presensi extends Model
     }
 
     public static function getAttendanceReport(){
-        $query = "SELECT users.id, 
-                    users.name,
-                    users.fungsional, 
-                    users.struktural, 
-                    SUM(presensi.status='hadir') AS hadir, 
-                    SUM(presensi.status='izin') AS izin,
-                    SUM(presensi.status='sakit') AS sakit,
-                    SUM(presensi.status='alpha') AS alpha, 
-                    COUNT(*) AS total
-                    FROM  presensi LEFT JOIN users 
-                    ON presensi.id_user = users.id 
-                    WHERE presensi.tanggal <= CURDATE()
-                    GROUP BY users.id;";
-         return $exist =  DB::select($query);
+        $query = "SELECT users.id, users.name, users.fungsional, users.struktural,
+                    sum(case when presensi.status = 'masuk' then 1 else 0 end) as masuk,
+                    sum(case when presensi.status = 'izin' then 1 else 0 end) as izin,
+                    sum(case when presensi.status = 'sakit' then 1 else 0 end) as sakit,
+                    sum(case when presensi.status = 'alpha' then 1 else 0 end) as alpha,
+                    COUNT(presensi.status) as total
+                    from presensi, users
+                    WHERE presensi.id_user=users.id
+                    group by presensi.id_user;";
+         return $exist =  DB::select($query)->get();
     }
     public static function isExist($date, $id){
         $date_now = strval(date("Y-m-d"))."'";
@@ -82,6 +78,10 @@ class Presensi extends Model
             return true;
         }
         return false;
+    }
+
+    protected static function getLastID(){
+        return DB::select('select id from presensi ORDER BY id DESC LIMIT 1;');
     }
 
 }
