@@ -53,12 +53,15 @@ class PresensiController extends Controller
 
 
         if(Presensi::isExist($date_now, $id)){
+            if(Presensi::isAlpha($date_now, $id)){
+                return redirect('/presensi')->with('error', 'Anda tidak bisa melakukan presensi hari ini karena sudah terdata alpha.');
+            }
             if(Presensi::isFinishedWorking($date_now, $id)){
                 return redirect('/presensi')->with('error', 'Anda sudah melakukan presensi hari ini.');
             }
             else{
                 Presensi::finishedWorking($date_now, $id);
-                return redirect('/presensi')->with('status', 'Data kehadiran anda berhasil disimpan.');
+                return redirect('/presensi')->with('status', 'Data kehadiran anda berhasil disimpan. (check out)');
             }
         }
         $lastID = Presensi::getLastID();
@@ -75,5 +78,14 @@ class PresensiController extends Controller
         $presensi->tanggal = date("Y-m-d");;
         $presensi->save();
         return redirect('/presensi')->with('status', 'Data kehadiran anda berhasil disimpan');
+    }
+
+    protected function addAll(){
+        $usersid = Presensi:: getNotPrecense();
+        var_dump($usersid);
+        if($usersid != NULL){
+            Presensi::addAlpha($usersid);
+        }
+        return redirect('/home')->with('status', 'Data kehadiran berhasil diupdate. Semua pegawai yang tidak melakukan presensi akan dianggap alpha oleh sistem');
     }
 }

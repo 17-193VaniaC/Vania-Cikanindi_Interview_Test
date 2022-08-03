@@ -92,7 +92,6 @@ class UpdateModal extends Component {
             userFungsional: this.state.userFungsional,
             userStruktural: this.state.userStruktural,
         }).then(() => {
-            // toast.success("Data berhasil diperbarui");
             setTimeout(() => {
                 location.reload();
             },2500)
@@ -132,10 +131,7 @@ class UpdateModal extends Component {
                             <div className="form-group">
                                 Jabatan Fungsional :
                         
-                                <select className="custom-select custom-select-lg mb-3" id='userFungsional'>
-                                    <option selected value={this.state.userFungsional ?? ""} onChange={this.inputUserFungsional}>
-                                        {this.state.userFungsional ?? ""}
-                                    </option>
+                                <select value={this.state.userFungsional ?? ""} onChange={this.inputUserFungsional} className="form-select" id='userFungsional' aria-label=".form-select-sm example">
                                     <option value="02">Administrasi</option>
                                     <option value="01">Engineer</option>
                                     <option value="03">Support</option>
@@ -143,14 +139,12 @@ class UpdateModal extends Component {
                                 </div>
                             <div className="form-group">
                                 Jabatan Struktural :
-                                <select className="custom-select custom-select-lg mb-3" id='userStruktural'>
-                                    <option selected value={this.state.userStruktural ?? ""} onChange={this.inputUserStruktural}>
-                                        {this.state.userStruktural ?? ""}
-                                    </option>
-                                    <option value="manajeman">Manajer</option>
+                                <select value={this.state.userStruktural ?? ""} onChange={this.inputUserStruktural}  className="form-select" id='userStruktural' aria-label=".form-select-sm example">
+                                    <option value="manajer">Manajer</option>
                                     <option value="team leader">Team Leader</option>
                                     <option value="staff">Staff</option>
                                 </select>
+                                
                             </div>
                             </form> 
                     </div>

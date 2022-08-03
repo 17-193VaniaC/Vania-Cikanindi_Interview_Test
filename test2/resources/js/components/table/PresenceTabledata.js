@@ -13,8 +13,40 @@ class PresenceTabledata extends Component{
             <tr>
                 <td>{this.props.data.id}</td>
                 <td>{this.props.data.name}</td>
-                <td>{this.props.data.fungsional}</td>
-                <td>{this.props.data.struktural}</td>
+                <td>
+                    {this.props.data.fungsional === '01' && (
+                            <>
+                            Engineer
+                            </>
+                        )}
+                    {this.props.data.fungsional === '02' && (
+                            <>
+                            Administrasi
+                            </>
+                        )}
+                    {this.props.data.struktural === '03' && (
+                            <>
+                            Support
+                            </>
+                        )}
+                </td>
+                <td>
+                    {this.props.data.struktural === 'manajer' && (
+                            <>
+                            Manajer
+                            </>
+                        )}
+                    {this.props.data.struktural === 'team leader' && (
+                            <>
+                            Team Leader
+                            </>
+                        )}
+                    {this.props.data.struktural === 'staff' && (
+                            <>
+                            Staff
+                            </>
+                        )}
+                </td>
                 <td>{this.props.data.hadir}</td>
                 <td>{this.props.data.izin}</td>
                 <td>{this.props.data.sakit}</td>

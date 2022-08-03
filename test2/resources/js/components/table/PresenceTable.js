@@ -25,13 +25,14 @@ class PresenceTable extends Component{
                 presensi: response.data
            });
         });
+        
     }
 
     render(){
         return (
             <div className="container">
             <div className="row justify-content-center">
-                <div className="col-md-6">
+                <div className="col-md-12">
                 <table className="table table-bordered">
                 <thead>
                     <th>NIP</th>

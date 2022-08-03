@@ -33,6 +33,7 @@ class PermissionTable extends Component{
                 <div className="col-md-8 ">
                     <table className="table table-bordered">
                     <thead>
+                        <th>No. Perizinan</th>
                         <th>NIP</th>
                         <th>Nama Pegawai</th>
                         <th>Izin</th>
@@ -52,7 +53,6 @@ class PermissionTable extends Component{
 
         );
     }
-
 
 }
 

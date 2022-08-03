@@ -20,17 +20,21 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Users
 Route::get('/get/user/list', [App\Http\Controllers\UserController::class, 'getUserList'])->name('user.list');
 Route::post('/get/individual/user/detail', [App\Http\Controllers\UserController::class, 'getUserDetails'])->name('user.details');
 Route::post('/update/user/data', [App\Http\Controllers\UserController::class, 'updateUserData'])->name('user.update');
 Route::delete('/delete/user/data/{user}', [App\Http\Controllers\UserController::class, 'deleteUser'])->name('user.delete');
 Route::get('/manage-user',[App\Http\Controllers\ManageuserController::class, 'index'])->middleware('rolefunctional');
+// Presensi
 Route::get('/presensi', [App\Http\Controllers\PresensiController::class, 'index']);
 Route::get('/presensi-hadir', [App\Http\Controllers\PresensiController::class, 'add']);
+Route::get('/presensi-addall', [App\Http\Controllers\PresensiController::class, 'addAll'])->middleware('rolestruktural');
+Route::get('/rekap-presensi', [App\Http\Controllers\AttendancerecapController::class, 'index'])->middleware('rolestruktural');
+Route::get('/get/presensi/list',[App\Http\Controllers\AttendancerecapController::class, 'getReport'])->name('presensi.list');
+// Perizinan
 Route::get('/izin', [App\Http\Controllers\PerizinanController::class, 'index']);
 Route::post('/izin-add', [App\Http\Controllers\PerizinanController::class, 'add']);
 Route::get('/get/izin/list', [App\Http\Controllers\AttendancerecapController::class, 'getPermissionList'])->name('izin.list');
 Route::get('/izin-approval', [App\Http\Controllers\AttendancerecapController::class, 'viewAttendanceApproval'])->middleware('rolestruktural');
-Route::post('/update/izin/data/{id}', [App\Http\Controllers\AttendancerecapController::class, 'approveThis'])->name('izin.update');
-Route::get('/rekap-presensi', [App\Http\Controllers\AttendancerecapController::class, 'index'])->middleware('rolestruktural');
-Route::get('/get/presensi/list',[App\Http\Controllers\AttendancerecapController::class, 'getReport'])->name('presensi.list');
+Route::post('/update/izin/data/', [App\Http\Controllers\AttendancerecapController::class, 'approveThis'])->name('izin.update');

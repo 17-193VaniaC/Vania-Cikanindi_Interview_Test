@@ -5526,7 +5526,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
- // import { toast } from 'react-toastify';
 
 
 
@@ -5545,7 +5544,6 @@ var DeleteModal = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "deleteUserData", function (userid) {
       axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]('/delete/user/data/' + userid).then(function () {
-        // toast.error("Data berhasil dihapus");
         setTimeout(function () {
           location.reload();
         }, 2500);
@@ -5655,8 +5653,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
- // import {toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -5705,7 +5701,6 @@ var UpdateModal = /*#__PURE__*/function (_Component) {
         userFungsional: _this.state.userFungsional,
         userStruktural: _this.state.userStruktural
       }).then(function () {
-        // toast.success("Data berhasil diperbarui");
         setTimeout(function () {
           location.reload();
         }, 2500);
@@ -5724,7 +5719,7 @@ var UpdateModal = /*#__PURE__*/function (_Component) {
   _createClass(UpdateModal, [{
     key: "render",
     value: function render() {
-      var _this$state$userName, _this$state$userEmail, _this$state$userFungs, _this$state$userFungs2, _this$state$userStruk, _this$state$userStruk2;
+      var _this$state$userName, _this$state$userEmail, _this$state$userFungs, _this$state$userStruk;
 
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "modal fade",
@@ -5773,14 +5768,12 @@ var UpdateModal = /*#__PURE__*/function (_Component) {
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                   className: "form-group",
                   children: ["Jabatan Fungsional :", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
-                    className: "custom-select custom-select-lg mb-3",
+                    value: (_this$state$userFungs = this.state.userFungsional) !== null && _this$state$userFungs !== void 0 ? _this$state$userFungs : "",
+                    onChange: this.inputUserFungsional,
+                    className: "form-select",
                     id: "userFungsional",
+                    "aria-label": ".form-select-sm example",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
-                      selected: true,
-                      value: (_this$state$userFungs = this.state.userFungsional) !== null && _this$state$userFungs !== void 0 ? _this$state$userFungs : "",
-                      onChange: this.inputUserFungsional,
-                      children: (_this$state$userFungs2 = this.state.userFungsional) !== null && _this$state$userFungs2 !== void 0 ? _this$state$userFungs2 : ""
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
                       value: "02",
                       children: "Administrasi"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
@@ -5794,15 +5787,13 @@ var UpdateModal = /*#__PURE__*/function (_Component) {
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                   className: "form-group",
                   children: ["Jabatan Struktural :", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
-                    className: "custom-select custom-select-lg mb-3",
+                    value: (_this$state$userStruk = this.state.userStruktural) !== null && _this$state$userStruk !== void 0 ? _this$state$userStruk : "",
+                    onChange: this.inputUserStruktural,
+                    className: "form-select",
                     id: "userStruktural",
+                    "aria-label": ".form-select-sm example",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
-                      selected: true,
-                      value: (_this$state$userStruk = this.state.userStruktural) !== null && _this$state$userStruk !== void 0 ? _this$state$userStruk : "",
-                      onChange: this.inputUserStruktural,
-                      children: (_this$state$userStruk2 = this.state.userStruktural) !== null && _this$state$userStruk2 !== void 0 ? _this$state$userStruk2 : ""
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
-                      value: "manajeman",
+                      value: "manajer",
                       children: "Manajer"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
                       value: "team leader",
@@ -6102,22 +6093,16 @@ var PermissionActionButton = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "approveThis", function (id) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/update/izin/data' + id).then(function () {
+    _defineProperty(_assertThisInitialized(_this), "approveThis", function (idPerizinan) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/update/izin/data', {
+        id_perizinan: idPerizinan
+      }).then(function () {
         setTimeout(function () {
           location.reload();
         }, 2500);
       });
     });
 
-    _this.state = {
-      currentUserId: null,
-      currentUserName: null,
-      currentUserEmail: null,
-      currentUserF: null,
-      currentUserS: null,
-      currentUserYear: null
-    };
     return _this;
   }
 
@@ -6129,13 +6114,13 @@ var PermissionActionButton = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "btn-group",
         role: "group",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-          type: "button",
-          className: "btn btn-primary",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          type: "submit",
+          className: "btn btn-info",
+          value: "Approve",
           onClick: function onClick() {
             _this2.approveThis(_this2.props.eachRowId);
-          },
-          children: "Approve"
+          }
         })
       });
     }
@@ -6239,6 +6224,8 @@ var PermissionTable = /*#__PURE__*/function (_Component) {
             className: "table table-bordered",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("thead", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
+                children: "No. Perizinan"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
                 children: "NIP"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
                 children: "Nama Pegawai"
@@ -6307,6 +6294,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -6320,16 +6309,45 @@ var PermissionTabledata = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(PermissionTabledata);
 
   function PermissionTabledata(props) {
+    var _this;
+
     _classCallCheck(this, PermissionTabledata);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "approveData", function (id) {
+      axios.post('/update/perizinan/data/').then(function () {
+        id: id;
+      }).then(function () {
+        // toast.success("Data berhasil diperbarui");
+        setTimeout(function () {
+          location.reload();
+        }, 2500);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "approveThis", function (idPerizinan) {
+      axios.post('/update/izin/data', {
+        id_perizinan: idPerizinan
+      }).then(function () {
+        setTimeout(function () {
+          location.reload();
+        }, 2500);
+      });
+    });
+
+    return _this;
   }
 
   _createClass(PermissionTabledata, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
+          children: this.props.data.id_perizinan
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
           children: this.props.data.id
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
           children: this.props.data.name
@@ -6338,8 +6356,17 @@ var PermissionTabledata = /*#__PURE__*/function (_Component) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
           children: this.props.data.tanggal
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_PermissionActionButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            eachRowId: this.props.data.id
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "btn-group",
+            role: "group",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+              type: "submit",
+              className: "btn btn-info",
+              value: "Approve",
+              onClick: function onClick() {
+                _this2.approveThis(_this2.props.data.id_perizinan);
+              }
+            })
           })
         })]
       });
@@ -6441,7 +6468,7 @@ var PresenceTable = /*#__PURE__*/function (_Component) {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "row justify-content-center",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "col-md-6",
+            className: "col-md-12",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("table", {
               className: "table table-bordered",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("thead", {
@@ -6528,6 +6555,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var PresenceTabledata = /*#__PURE__*/function (_Component) {
   _inherits(PresenceTabledata, _Component);
 
@@ -6547,10 +6575,22 @@ var PresenceTabledata = /*#__PURE__*/function (_Component) {
           children: this.props.data.id
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
           children: this.props.data.name
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-          children: this.props.data.fungsional
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-          children: this.props.data.struktural
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
+          children: [this.props.data.fungsional === '01' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+            children: "Engineer"
+          }), this.props.data.fungsional === '02' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+            children: "Administrasi"
+          }), this.props.data.struktural === '03' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+            children: "Support"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
+          children: [this.props.data.struktural === 'manajer' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+            children: "Manajer"
+          }), this.props.data.struktural === 'team leader' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+            children: "Team Leader"
+          }), this.props.data.struktural === 'staff' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+            children: "Staff"
+          })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
           children: this.props.data.hadir
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
@@ -6890,6 +6930,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var UserTabledata = /*#__PURE__*/function (_Component) {
   _inherits(UserTabledata, _Component);
 
@@ -6911,10 +6952,22 @@ var UserTabledata = /*#__PURE__*/function (_Component) {
           children: this.props.data.name
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
           children: this.props.data.email
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
-          children: this.props.data.fungsional
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
-          children: this.props.data.struktural
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("td", {
+          children: [this.props.data.fungsional === '01' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+            children: "Engineer"
+          }), this.props.data.fungsional === '02' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+            children: "Administrasi"
+          }), this.props.data.struktural === '03' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+            children: "Support"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("td", {
+          children: [this.props.data.struktural === 'manajer' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+            children: "Manajer"
+          }), this.props.data.struktural === 'team leader' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+            children: "Team Leader"
+          }), this.props.data.struktural === 'staff' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+            children: "Staff"
+          })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
           children: this.props.data.tahun_masuk
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {

@@ -9,7 +9,6 @@ class DeleteModal extends Component {
 
     deleteUserData = (userid) => {
         axios.delete('/delete/user/data/' + userid).then(() => {
-            // toast.error("Data berhasil dihapus");
             setTimeout(() => {
                 location.reload();
             },2500)

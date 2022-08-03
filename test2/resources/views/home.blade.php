@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container " id=''>
+    @if(session('status'))
+        {{ session('status') }}
+    @endif
 
     <div class="row justify-content-center">
 
@@ -24,7 +27,8 @@
                 <a href="/rekap-presensi" class="btn btn-outline-primary">Laporan Kehadiran</a>
                 <p></p>
                 <a href="/izin-approval" class="btn btn-outline-primary">Daftar Perizinan</a>
-                
+                <p></p>
+                <a href="/presensi-addall" class="btn btn-warning">Absenkan Semua Pegawai</a>
             </div>
         </div>
                

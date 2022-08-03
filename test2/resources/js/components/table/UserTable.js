@@ -21,7 +21,6 @@ class UserTable extends Component{
     getUserList = () => {
         let self = this;
         axios.get('/get/user/list').then(function(response){
-     
            self.setState({
                 users: response.data
            });

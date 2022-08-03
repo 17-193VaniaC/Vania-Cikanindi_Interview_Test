@@ -40,7 +40,7 @@ class UserController extends Controller
             $userEmail  = $request->get('userEmail');
             $userFungsional = $request->get('userFungsional');
             $userStruktural = $request->get('userStruktural');
-
+            
             User::where('id', $userId)->update([
                 'name'   =>  $userName,
                 'email' =>  $userEmail,
